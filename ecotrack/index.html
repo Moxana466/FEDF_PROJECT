@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EcoTrack 🌱</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f766e">
+</head>
+<body>
+  <header class="topbar">
+    <h1>🌱 EcoTrack</h1>
+    <button id="installBtn" class="btn secondary" hidden>Install App</button>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Today: <span id="today"></span></h2>
+      <p class="muted">Track small eco-actions. Build streaks. Make impact.</p>
+
+      <div class="stats">
+        <div class="stat"><span id="completedCount">0</span><small>Done</small></div>
+        <div class="stat"><span id="totalCount">0</span><small>Total</small></div>
+        <div class="stat"><span id="streak">0</span><small>Streak</small></div>
+      </div>
+
+      <progress id="progress" value="0" max="100"></progress>
+    </section>
+
+    <section class="card">
+      <h3>Your Habits</h3>
+      <ul id="habitList" class="list"></ul>
+      <form id="addForm" class="row">
+        <input id="habitInput" type="text" placeholder="Add a new eco habit (e.g., Carry bottle)" required />
+        <button class="btn">Add</button>
+      </form>
+      <div class="row gap">
+        <button id="resetDay" class="btn secondary">Uncheck Today</button>
+        <button id="clearAll" class="btn danger">Delete All Habits</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Ideas</h3>
+      <div class="chips" id="suggestions"></div>
+    </section>
+  </main>
+
+  <footer class="footer">Made with ♻️ in EcoTrack</footer>
+
+  <!-- App Script -->
+  <script src="app.js" defer></script>
+
+  <!-- Service Worker -->
+  <script>
+    if ('service_worker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(() => console.log("✅ Service Worker registered"))
+        .catch(err => console.error("⚠️ Service Worker failed:", err));
+    }
+  </script>
+</body>
+</html>
